@@ -38,21 +38,36 @@ class Pokemon {
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     return Pokemon(
-      id: json['id'],
-      name: json['name'],
-      number: json['number'],
-      image: json['image'],
-      weight: json['weight'],
-      height: json['height'],
+      id: json['id'] ?? '', // Ensure default values or handle nulls
+      name: json['name'] ?? '',
+      number: json['number'] ?? '',
+      image: json['image'] ?? '',
+      weight: json['weight'] != null
+          ? PokemonDimension.fromJson(json['weight'])
+          : null,
+      height: json['height'] != null
+          ? PokemonDimension.fromJson(json['height'])
+          : null,
       classification: json['classification'],
-      types: json['types'],
-      resistant: json['resistant'],
-      attacks: json['attacks'],
-      weaknesses: json['weaknesses'],
-      fleeRate: json['fleeRate'],
-      maxCP: json['maxCP'],
-      evolutions: json['evolutions'],
-      maxHP: json['maxHP'],
+      types: (json['types'] as List<dynamic>?)
+          ?.map((type) => type as String)
+          .toList(),
+      resistant: (json['resistant'] as List<dynamic>?)
+          ?.map((res) => res as String)
+          .toList(),
+      attacks: json['attacks'] != null
+          ? PokemonAttack.fromJson(json['attacks'])
+          : null,
+      weaknesses: (json['weaknesses'] as List<dynamic>?)
+          ?.map((weakness) => weakness as String)
+          .toList(),
+      fleeRate: (json['fleeRate'] as num?)?.toDouble(),
+      maxCP: json['maxCP'] as int?,
+      evolutions: (json['evolutions'] as List<dynamic>?)
+          ?.map((evolution) =>
+              Pokemon.fromJson(evolution as Map<String, dynamic>))
+          .toList(),
+      maxHP: json['maxHP'] as int?,
     );
   }
 }
