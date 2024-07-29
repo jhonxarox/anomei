@@ -41,7 +41,7 @@ class Pokemon {
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     return Pokemon(
-      id: json['id'] ?? '', // Ensure default values or handle nulls
+      id: json['id'] ?? '',
       name: json['name'] ?? '',
       number: json['number'] ?? '',
       image: json['image'] ?? '',

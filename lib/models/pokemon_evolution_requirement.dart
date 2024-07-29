@@ -1,6 +1,6 @@
 class PokemonEvolutionRequirement {
   String? name;
-  String? amount;
+  int? amount;
 
   PokemonEvolutionRequirement({
     this.name,
@@ -9,8 +9,8 @@ class PokemonEvolutionRequirement {
 
   factory PokemonEvolutionRequirement.fromJson(Map<String, dynamic> json) {
     return PokemonEvolutionRequirement(
-      name: json['name'],
-      amount: json['amount'],
+      name: json['name'] ?? '',
+      amount: json['amount'] as int?,
     );
   }
 }
