@@ -1,4 +1,4 @@
-import 'package:anemoi/view_models/pokemon_view_model.dart';
+import 'package:anemoi/view_models/pokemon_list_view_model.dart';
 import 'package:anemoi/views/pokemon_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => PokemonViewModel()..fetchPokemons(),
+      create: (context) => PokemonListViewModel()..fetchPokemons(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

@@ -1,5 +1,6 @@
 import 'package:anemoi/models/pokemon_attack.dart';
 import 'package:anemoi/models/pokemon_dimension.dart';
+import 'package:anemoi/models/pokemon_evolution_requirement.dart';
 
 class Pokemon {
   final String id;
@@ -17,6 +18,7 @@ class Pokemon {
   int? maxCP;
   List<Pokemon>? evolutions;
   int? maxHP;
+  PokemonEvolutionRequirement? pokemonEvolutionRequirement;
 
   Pokemon({
     required this.id,
@@ -34,6 +36,7 @@ class Pokemon {
     this.maxCP,
     this.evolutions,
     this.maxHP,
+    this.pokemonEvolutionRequirement,
   });
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
@@ -68,6 +71,23 @@ class Pokemon {
               Pokemon.fromJson(evolution as Map<String, dynamic>))
           .toList(),
       maxHP: json['maxHP'] as int?,
+      pokemonEvolutionRequirement: json['evolutionRequirements'] != null
+          ? PokemonEvolutionRequirement.fromJson(json['evolutionRequirements'])
+          : null,
     );
+  }
+
+  String getHeight() {
+    if (height == null) {
+      return 'Unknown';
+    }
+    return '${height?.min} - ${height?.max}';
+  }
+
+  String getWeight() {
+    if (weight == null) {
+      return 'Unknown';
+    }
+    return '${weight?.min} - ${weight?.max}';
   }
 }
